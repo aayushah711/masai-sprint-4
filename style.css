@@ -11,6 +11,16 @@
     top: 95px;
 }
 
+#addItem {
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    opacity: 50%;
+    color: white;
+    font-size: 50px;
+    padding: 5px;
+    border-radius: 50%;
+}
 .fa-car {
     background-color: deeppink;
     color: white;

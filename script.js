@@ -41,6 +41,9 @@ function createUser(){
     user.lastName = document.getElementById("lastName").value 
     user.email = document.getElementById("email").value
     user.password = document.getElementById("password").value
+    user.balance = 0.00
+    user.expenses = {}
+    user.incomes = {}
     return user
 }
 
@@ -70,7 +73,7 @@ function checkPassword(){
     event.preventDefault()
     var password = document.getElementById("password").value
     var confirmPassword = document.getElementById("confirmPassword").value
-    if (password === confirmPassword){
+    if (password === confirmPassword && password != ""){
         signupUser()
     }
     else{

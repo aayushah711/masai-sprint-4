@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav class="navbar fixed-top navbar-light bg-warning">
+    <nav class="navbar fixed-top navbar-light bg-warning" style="z-index: 2;">
         <a class="navbar-brand" href="dashboard.html"><i class="fas fa-home" style="font-size: 30px;"></i></a>
 
         <div class="dropdown">
@@ -34,10 +34,10 @@
         </div>
     </nav>
 
-    <nav class="navbar fixed-top navbar-light bg-secondary" style="top: 55px;">
+    <nav class="navbar fixed-top navbar-light bg-secondary" style="top: 55px; z-index: 1;">
         <div class="row w-100 text-white m-0">
             <div class="col-1 d-flex align-items-center"><i class="fas fa-arrow-left" style="font-size: 25px;"></i></div>
-            <div class="col-10 text-center font-weight-bold">17th Jun, 2020 : $20.00</div>
+            <div class="col-10 text-center font-weight-bold" id="dayExpenses"></div>
             <div class="col-1 d-flex justify-content-end text-right align-items-center"><i class="fas fa-arrow-right" style="font-size: 25px;"></i></div>
         </div>
     </nav>
@@ -81,12 +81,77 @@
         </div>
     </div>
 
+    <div>
+        <button href=""><i class="fas fa-plus btn btn-warning" id="addItem" data-toggle="modal" data-target="#exampleModal"></i></button>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add Expense</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+
+                <form>
+                    <div class="form-group">
+                        <label for="amount">Amount</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">₹</div>
+                            </div>
+                            <input type="number" class="form-control" id="amount" placeholder="Amount">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date">Date</label>
+                        <input type="date" class="form-control" id="date">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <select class="custom-select mb-3" id="category">
+                            <option value="Other" selected>Other</option>
+                            <option value="Automobile">Automobile</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Family">Family</option>
+                            <option value="Food">Food & Drinks</option>
+                            <option value="Petrol">Petrol</option>
+                            <option value="Gifts">Gifts</option>
+                            <option value="Groceries">Groceries</option>
+                            <option value="Health">Health & fitness</option>
+                            <option value="Housing">Housing</option>
+                            <option value="Medical">Medical</option>
+                            <option value="Parking">Parking</option>
+                            <option value="Shopping">Shopping</option>
+                            <option value="Utilities">Utilities</option>
+                        </select>
+                    </div>
+  
+                    <div class="form-group">
+                        <label for="notes">Notes (Optional)</label>
+                        <textarea class="form-control" id="notes" rows="3" placeholder="Notes (Optional)"></textarea>
+                      </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-warning" id="addExpense" onclick="addExpense()">Save changes</button>
+            </div>
+        </div>
+        </div>
+    </div>
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-    <script src="script.js"></script>
+    <script src="expenses.js"></script>
 
 </body>
 </html>

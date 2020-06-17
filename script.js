@@ -1,13 +1,12 @@
 function loginUser(){
     event.preventDefault()
-    console.log("logging user")
+    console.log("logging in")
     var users = localStorage.getItem("users")
     users = JSON.parse(users)
     var email = document.getElementById("email").value
     var password = document.getElementById("password").value
 
     if (users[email]){
-        console.log(users[email]["password"])
         if (users[email]["password"] === password){
             localStorage.setItem("current-user", email)
             location.href = "dashboard.html"
@@ -38,12 +37,15 @@ function displaySignedup(){
 
 function createUser(){
     var user = {}
+    user.firstName = document.getElementById("firstName").value 
+    user.lastName = document.getElementById("lastName").value 
     user.email = document.getElementById("email").value
     user.password = document.getElementById("password").value
     return user
 }
 
 function signupUser(){
+    console.log("signing up")
     var users = localStorage.getItem("users")
     users = JSON.parse(users)
     if (users){

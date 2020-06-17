@@ -5,3 +5,16 @@
 .empty-div {
     height: 200px;
 }
+
+#expense-items {
+    position: absolute;
+    top: 95px;
+}
+
+.fa-car {
+    background-color: deeppink;
+    color: white;
+    font-size: 30px;
+    padding: 5px;
+    border-radius: 50%;
+}

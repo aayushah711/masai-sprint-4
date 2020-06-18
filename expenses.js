@@ -1,4 +1,4 @@
-var balance = 0
+var balanceForDay = 0
 var currentUser = localStorage.getItem("current-user")
 if (currentUser){
     var users = JSON.parse(localStorage.getItem("users"))
@@ -11,8 +11,17 @@ else {
 
 function updateDayExpenses(){
     var dayExpenses = document.querySelector("#dayExpenses")
-    dayExpenses.textContent = new Date().toDateString() + " : ₹" + balance
+    dayExpenses.textContent = new Date().toDateString() + " : ₹" + balanceForDay
     console.log("updating date...")
+}
+
+function userBalance(){
+    var date = "2020-06-18" // Add logic here
+    user.balance[date] = balanceForDay
+
+    console.log(user.balance)
+    users[currentUser] = user
+    localStorage.setItem("users",JSON.stringify(users))
 }
 
 function expenseCards(){
@@ -22,16 +31,19 @@ function expenseCards(){
     for (var i=0;i<expensesForDay.length;i++){
         var expense = expensesForDay[i]
         var card = createCard(expense.amount,expense.category,expense.notes)
-        balance += Number(expense.amount)
+        balanceForDay += Number(expense.amount)
         expenseCards.append(card)
     }
+
+    userBalance()
+
     
     function createCard(amount,category,notes){
         var h5 = createTag("h5",{"class":"mt-0"},category)
         var mediaBody = createTag("div",{"class":"media-body"})
         mediaBody.append(h5,notes)
         var media = createTag("div", {"class":"media"})
-        var pic = createTag("i",{"class":"fas fa-car mr-3"})
+        var pic = createTag("i",{"class":"fas fa-arrow-right mr-3"})
         media.append(pic,mediaBody)
         var col10 = createTag("div", {"class":"col-10"})
         col10.append(media)

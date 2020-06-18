@@ -1,4 +1,4 @@
-var balanceForDay = 0
+var totalExpenseForDay = 0
 var currentUser = localStorage.getItem("current-user")
 if (currentUser){
     var users = JSON.parse(localStorage.getItem("users"))
@@ -11,16 +11,24 @@ else {
 
 function updateDayExpenses(){
     var dayExpenses = document.querySelector("#dayExpenses")
-    dayExpenses.textContent = new Date().toDateString() + " : ₹" + balanceForDay
+    dayExpenses.textContent = new Date().toDateString() + " : ₹" + totalExpenseForDay
     console.log("updating date...")
 }
 
 function userBalance(){
     var date = "2020-06-18" // Add logic here
-    user.balance[date] = balanceForDay
-
-    console.log(user.balance)
-    users[currentUser] = user
+    if (user.balance[date]){
+        user.balance[date]["expenses"] = totalExpenseForDay
+    }
+    else {
+        console.log("balances don't exist")
+        user.balance[date] = {
+            "date": date,
+            "expenses": totalExpenseForDay,
+            "incomes": 0,
+        }
+    }
+    user.balance[date]["balance"] = Number(user.balance[date]["incomes"]) - Number(user.balance[date]["expenses"])
     localStorage.setItem("users",JSON.stringify(users))
 }
 
@@ -28,11 +36,13 @@ function expenseCards(){
     var expenseCards = document.querySelector("#expenseCards")
     var date = "2020-06-18" // Add logic here
     var expensesForDay = user.expenses[date]
-    for (var i=0;i<expensesForDay.length;i++){
-        var expense = expensesForDay[i]
-        var card = createCard(expense.amount,expense.category,expense.notes)
-        balanceForDay += Number(expense.amount)
-        expenseCards.append(card)
+    if (expensesForDay){
+        for (var i=0;i<expensesForDay.length;i++){
+            var expense = expensesForDay[i]
+            var card = createCard(expense.amount,expense.category,expense.notes)
+            totalExpenseForDay += Number(expense.amount)
+            expenseCards.append(card)
+        }
     }
 
     userBalance()

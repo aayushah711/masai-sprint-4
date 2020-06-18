@@ -23,7 +23,7 @@
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href="#">
                     <p class="my-0 text-secondary"><small>TOTAL BALANCE</small></p>
-                    <p class="my-0 text-success">₹1,678.00</p>
+                    <p class="my-0 text-success" id="balanceNav">₹0</p>
                 </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Income</a>
@@ -49,17 +49,17 @@
                 <div class="col-12">
                     <div class="card shadow p-3 mb-1 rounded">
                         <div class="card-body">
-                            <h6 class="text-secondary"><small>Income ₹2,000.00</small></h5>
+                            <h6 class="text-secondary"><small>Income ₹0</small></h5>
                             <div class="progress">
-                                <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                             <hr>
-                            <h6 class="text-secondary"><small>Expenses ₹322.00</small></h6>
+                            <h6 class="text-secondary"><small id="expensesProgress">Expenses ₹0</small></h6>
                             <div class="progress">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 15%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: 0%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                             <hr>
-                            <h2 class="text-secondary mb-0"><small>Balance ₹1,678.00</small></h2>
+                            <h2 class="text-secondary mb-0"><small id="balanceProgress" class="text-success">Balance ₹0</small></h2>
                         </div>
                     </div>
                 </div>
@@ -74,7 +74,7 @@
                                 <div class="row">
                                     <h3>Income</h3>
                                 </div>
-                                <div class="row">₹2,000.00</div>
+                                <div class="row">₹0</div>
                             </div>
                             <div class="col-4 d-flex justify-content-center align-items-center">
                                 <i class="fas fa-plus" style="font-size: 50px"></i>
@@ -89,7 +89,7 @@
                                 <div class="row">
                                     <h3>Expenses</h3>
                                 </div>
-                                <div class="row">₹322.00</div>
+                                <div class="row" id="expensesCard">₹0</div>
                             </div>
                             <div class="col-4 d-flex justify-content-center align-items-center">
                                 <i class="fas fa-minus" style="font-size: 50px"></i>
@@ -104,7 +104,7 @@
                                 <div class="row">
                                     <h3>Account</h3>
                                 </div>
-                                <div class="row">₹1,678.00</div>
+                                <div class="row" id="balanceCard">₹0</div>
                             </div>
                             <div class="col-4 d-flex justify-content-center align-items-center">
                                 <i class="fas fa-equals" style="font-size: 50px"></i>
@@ -137,6 +137,6 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-    <script src="script.js"></script>
+    <script src="dashboard.js"></script>
 </body>
 </html>

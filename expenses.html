@@ -36,9 +36,9 @@
 
     <nav class="navbar fixed-top navbar-light bg-secondary" style="top: 55px; z-index: 1;">
         <div class="row w-100 text-white m-0">
-            <div class="col-1 d-flex align-items-center"><i class="fas fa-arrow-left" style="font-size: 25px;"></i></div>
-            <div class="col-10 text-center font-weight-bold" id="dayExpenses"></div>
-            <div class="col-1 d-flex justify-content-end text-right align-items-center"><i class="fas fa-arrow-right" style="font-size: 25px;"></i></div>
+            <div class="col-1 d-flex align-items-center" onclick="prevDayExpense()"><i class="fas fa-arrow-left" style="font-size: 25px;"></i></div>
+            <div class="col-9 px-3 col-sm-10 text-center font-weight-bold" id="dayExpenses"></div>
+            <div class="col-1 d-flex justify-content-end text-right align-items-center" onclick="nextDayExpense()"><i class="fas fa-arrow-right" style="font-size: 25px;"></i></div>
         </div>
     </nav>
 

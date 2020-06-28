@@ -1,41 +1,44 @@
-var totalExpenseForDay = 0
+"use strict";
+
+var BASE_URL = "expenses.html"
+var activeDate
+
+function getActiveDate() {
+    var params = new URLSearchParams(document.location.search)
+    activeDate = params.get("activeDate")
+    if (activeDate === null){
+        activeDate = new Date()
+    }
+    else {
+        activeDate = new Date(activeDate)
+    }
+}
+
+var totalExpenseForDay = 0 // Initialised total expenses for the day with 0
 var currentUser = localStorage.getItem("current-user")
-if (currentUser){
+if (currentUser){ // If current user is available: fetch its data
     var users = JSON.parse(localStorage.getItem("users"))
     var user = users[currentUser] 
 }
-else {
+else { // Else ask to login
     alert("Please login!")
     location.href = "login.html"
 }
 
-function updateDayExpenses(){
-    var dayExpenses = document.querySelector("#dayExpenses")
-    dayExpenses.textContent = new Date().toDateString() + " : ₹" + totalExpenseForDay
-    console.log("updating date...")
-}
-
-function userBalance(){
-    var date = "2020-06-18" // Add logic here
-    if (user.balance[date]){
-        user.balance[date]["expenses"] = totalExpenseForDay
-    }
-    else {
-        console.log("balances don't exist")
-        user.balance[date] = {
-            "date": date,
-            "expenses": totalExpenseForDay,
-            "incomes": 0,
-        }
-    }
-    user.balance[date]["balance"] = Number(user.balance[date]["incomes"]) - Number(user.balance[date]["expenses"])
-    localStorage.setItem("users",JSON.stringify(users))
+// On load display : 
+// 1. expense cards 
+// 2. total expenses for the day in rupees on the gray navbar
+window.onload = function(){
+    getActiveDate()
+    expenseCards()
+    updateDayExpenses()
 }
 
 function expenseCards(){
     var expenseCards = document.querySelector("#expenseCards")
-    var date = "2020-06-18" // Add logic here
-    var expensesForDay = user.expenses[date]
+    expenseCards.innerHTML = ""
+    // var activeDate = "2020-06-18" // Add logic here
+    var expensesForDay = user.expenses[activeDate.toDateString()]
     if (expensesForDay){
         for (var i=0;i<expensesForDay.length;i++){
             var expense = expensesForDay[i]
@@ -70,20 +73,81 @@ function expenseCards(){
     }
 }
 
+function userBalance(){
+    // var activeDate = "2020-06-18" // Add logic here
+    console.log(activeDate)
+    if (user.balance[activeDate.toDateString()]){
+        user.balance[activeDate.toDateString()]["expenses"] = totalExpenseForDay
+    }
+    else {
+        console.log("balances don't exist")
+        user.balance[activeDate.toDateString()] = {
+            "date": activeDate.toDateString(),
+            "expenses": totalExpenseForDay,
+            "incomes": 0,
+        }
+    }
+    user.balance[activeDate.toDateString()]["balance"] = Number(user.balance[activeDate.toDateString()]["incomes"]) - Number(user.balance[activeDate.toDateString()]["expenses"])
+    localStorage.setItem("users",JSON.stringify(users))
+}
+
+// returns a tag with required attributes & content (Eg. div tag with class="card")
 function createTag(tag,attributes,content){
     var tag = document.createElement(tag)
-    for (key in attributes){
+    for (var key in attributes){
         tag.setAttribute(key,attributes[key])
     }
     tag.textContent = content
     return tag
 }
 
+// updates the gray navbar with total expenses for the day in rupees
+function updateDayExpenses(){
+    var dayExpenses = document.querySelector("#dayExpenses")
+    dayExpenses.textContent = activeDate.toDateString() + " : ₹" + totalExpenseForDay
+    console.log("updating date...")
+}
+
+// Go to the previous day page
+function prevDayExpense(){
+    activeDate.setDate(activeDate.getDate()-1)
+    refreshPage()
+}
+
+// Go to the next day page
+function nextDayExpense(){
+    activeDate.setDate(activeDate.getDate()+1)
+    refreshPage()
+}
+
+function refreshPage(){
+    var params = new URLSearchParams();
+    params.set("activeDate",activeDate.toDateString())
+    location = BASE_URL+"?"+params
+}
+
+// // Gives a string for today's date in the format yyyy-mm-dd (Eg. "2020-06-18")
+// function todaysDate(date=new Date()) {
+//     var d = new Date(date),
+//         month = '' + (d.getMonth() + 1),
+//         day = '' + d.getDate(),
+//         year = d.getFullYear();
+
+//     if (month.length < 2) 
+//         month = '0' + month;
+//     if (day.length < 2) 
+//         day = '0' + day;
+
+//     return [year, month, day].join('-');
+// }
+
+// Enables user to add a new expense item & stores that data
 function addExpense(){
     console.log("Adding expense")
     var expense = {}
     expense.amount = document.querySelector("#amount").value
-    expense.date = document.querySelector("#date").value
+    expense.date = new Date(document.querySelector("#date").value)
+    expense.date = expense.date.toDateString()
     console.log(expense.date)
     expense.category = document.querySelector("#category").value
     expense.notes = document.querySelector("#notes").value
@@ -104,7 +168,3 @@ function addExpense(){
     location.href = "expenses.html"
 }
 
-window.onload = function(){
-    expenseCards()
-    updateDayExpenses()
-}

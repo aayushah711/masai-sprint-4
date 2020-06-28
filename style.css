@@ -28,3 +28,6 @@
     padding: 5px;
     border-radius: 50%;
 }
+nav .fa-arrow-left:hover, nav .fa-arrow-right:hover {
+    cursor: pointer;
+}

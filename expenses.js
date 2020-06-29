@@ -57,7 +57,8 @@ function expenseCards(){
         var mediaBody = createTag("div",{"class":"media-body"})
         mediaBody.append(h5,notes)
         var media = createTag("div", {"class":"media"})
-        var pic = createTag("i",{"class":"fas fa-arrow-right mr-3"})
+        // var pic = createTag("i",{"class":"fas fa-arrow-right mr-3"})
+        var pic = createTag("i",{"class": "fas fa-"+getPic(category)+" mr-3"})
         media.append(pic,mediaBody)
         var col10 = createTag("div", {"class":"col-10"})
         col10.append(media)
@@ -71,6 +72,38 @@ function expenseCards(){
         var card = createTag("div", {"class":"card m-2"})
         card.append(cardBody)
         return card
+    }
+
+    function getPic(category){
+        switch (category){
+            case "Automobile":
+                return "car-alt bg-primary"
+            case "Entertainment":
+                return "theater-masks bg-secondary"
+            case "Family":
+                return "child bg-success"
+            case "Food":
+                return "utensils bg-danger"
+            case "Petrol":
+                return "gas-pump bg-warning"
+            case "Gifts":
+                return "gift bg-info"
+            case "Groceries":
+                return "shopping-cart bg-dark"
+            case "Health":
+                return "running bg-primary"
+            case "Housing":
+                return "house-user bg-secondary"
+            case "Medical":
+                return "medkit bg-success"
+            case "Parking":
+                return "parking bg-danger"
+            case "Shopping":
+                return "shopping-bag bg-warning"
+            case "Utilities":
+                return "bolt bg-info"
+        }
+        return "arrow-right"
     }
 }
 

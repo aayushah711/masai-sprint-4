@@ -32,6 +32,7 @@ window.onload = function(){
     getActiveDate()
     expenseCards()
     updateDayExpenses()
+    updateModalDate()
 }
 
 function expenseCards(){
@@ -126,20 +127,20 @@ function refreshPage(){
     location = BASE_URL+"?"+params
 }
 
-// // Gives a string for today's date in the format yyyy-mm-dd (Eg. "2020-06-18")
-// function todaysDate(date=new Date()) {
-//     var d = new Date(date),
-//         month = '' + (d.getMonth() + 1),
-//         day = '' + d.getDate(),
-//         year = d.getFullYear();
+// Gives a string for today's date in the format yyyy-mm-dd (Eg. "2020-06-18")
+function todaysDate(date=new Date()) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
 
-//     if (month.length < 2) 
-//         month = '0' + month;
-//     if (day.length < 2) 
-//         day = '0' + day;
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
 
-//     return [year, month, day].join('-');
-// }
+    return [year, month, day].join('-');
+}
 
 // Enables user to add a new expense item & stores that data
 function addExpense(){
@@ -168,3 +169,8 @@ function addExpense(){
     location.href = "expenses.html"
 }
 
+// Changes the placeholder date to date for that day inside the modal form
+function updateModalDate(){
+    var date = document.getElementById("date")
+    date.value = todaysDate(activeDate)
+}

@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav class="navbar fixed-top navbar-light bg-warning" style="z-index: 2;">
+    <nav class="navbar fixed-top navbar-light bg-warning">
         <a class="navbar-brand" href="dashboard.html"><i class="fas fa-home" style="font-size: 30px;"></i></a>
 
         <div class="dropdown">
@@ -22,7 +22,7 @@
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href="#">
                     <p class="my-0 text-secondary"><small>TOTAL BALANCE</small></p>
-                    <p class="my-0 text-success">₹1,678.00</p>
+                    <p class="my-0 text-success" id="balanceNav">₹0</p>
                 </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Income</a>
@@ -33,7 +33,6 @@
             </div>
         </div>
     </nav>
-
     <nav class="navbar fixed-top navbar-light bg-secondary" style="top: 55px; z-index: 1;">
         <div class="row w-100 text-white m-0">
             <div class="col-1 d-flex align-items-center" onclick="prevDayExpense()"><i class="fas fa-arrow-left" style="font-size: 25px;"></i></div>

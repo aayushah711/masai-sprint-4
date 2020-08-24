@@ -2,17 +2,6 @@
 
 var BASE_URL = 'expenses.html';
 var activeDate;
-
-function getActiveDate() {
-	var params = new URLSearchParams(document.location.search);
-	activeDate = params.get('activeDate');
-	if (activeDate === null) {
-		activeDate = new Date();
-	} else {
-		activeDate = new Date(activeDate);
-	}
-}
-
 var totalExpenseForDay = 0; // Initialised total expenses for the day with 0
 var currentUser = localStorage.getItem('current-user');
 if (currentUser) {
@@ -25,10 +14,24 @@ if (currentUser) {
 	location.href = 'login.html';
 }
 
+function getActiveDate() {
+	var params = new URLSearchParams(document.location.search);
+	activeDate = params.get('activeDate');
+	if (activeDate === null) {
+		activeDate = new Date();
+	} else {
+		activeDate = new Date(activeDate);
+	}
+}
+
 function updateNavData() {
-	var date = new Date().toDateString();
-	if (user['balance'][date]) {
-		var balance = Number(user['balance'][date]['balance']);
+	var balance = 0;
+	if (user['balance']) {
+		let balances = user['balance'];
+
+		for (let key in balances) {
+			balance += balances[key]['balance'];
+		}
 	} else {
 		var balance = 0;
 	}
@@ -42,17 +45,6 @@ function updateNavData() {
 		balanceNav.textContent = '₹' + balance;
 	}
 }
-
-// On load display :
-// 1. expense cards
-// 2. total expenses for the day in rupees on the gray navbar
-window.onload = function() {
-	updateNavData();
-	getActiveDate();
-	expenseCards();
-	updateDayExpenses();
-	updateModalDate();
-};
 
 function expenseCards() {
 	var expenseCards = document.querySelector('#expenseCards');
@@ -158,7 +150,6 @@ function createTag(tag, attributes, content) {
 function updateDayExpenses() {
 	var dayExpenses = document.querySelector('#dayExpenses');
 	dayExpenses.textContent = activeDate.toDateString() + ' : ₹' + totalExpenseForDay;
-	console.log('updating date...');
 }
 
 // Go to the previous day page
@@ -223,3 +214,14 @@ function updateModalDate() {
 	var date = document.getElementById('date');
 	date.value = todaysDate(activeDate);
 }
+
+// On load display :
+// 1. expense cards
+// 2. total expenses for the day in rupees on the gray navbar
+window.onload = function() {
+	updateNavData();
+	getActiveDate();
+	expenseCards();
+	updateDayExpenses();
+	updateModalDate();
+};

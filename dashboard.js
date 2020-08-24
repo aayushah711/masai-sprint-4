@@ -8,10 +8,15 @@ if (currentUser) {
 }
 
 function updateData() {
-	var date = new Date().toDateString();
-	if (user['balance'][date]) {
-		var expenses = Number(user['balance'][date]['expenses']);
-		var balance = Number(user['balance'][date]['balance']);
+	var balance = 0;
+	var expenses = 0;
+	if (user['balance']) {
+		let balances = user['balance'];
+
+		for (let key in balances) {
+			balance += balances[key]['balance'];
+			expenses += balances[key]['expenses'];
+		}
 	} else {
 		var expenses = 0;
 		var balance = 0;
